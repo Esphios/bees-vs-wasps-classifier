@@ -1,216 +1,121 @@
-# Cats Vs Dogs Classifier
-## To view the Project Notebook
-Since I have implemented three architectures in the same notebook, the size of the ipynb notebook is bigger than usual and hence it may not open in GitHub. You can view the Project notebook [here](https://nbviewer.jupyter.org/github/chinmaykumar06/cats-vs-dogs-classifier/blob/master/CatsVsDogs.ipynb) .
+# Bees Vs Wasps Classifier
 
-## Overview of the Project
-<img src="https://github.com/chinmaykumar06/cats-vs-dogs-classifier/blob/master/output.png" width="1200">
+## Para ver o Caderno de Projetos
 
-This project is inspired by the Kaggle Challange held in 2003 in which thousands of images of cats and dogs were given and a model was to be built to classify those images into cats and dogs. The best accuracy achieved in that competition was 98%!
+Como implementei três arquiteturas no mesmo notebook, o tamanho do notebook ipynb é maior do que o normal e, portanto, pode não abrir em GitHub. Você pode ver o Caderno do Projeto [aqui](https://github.com/Esphios/bees-vs-wasps-classifier/blob/master/BeesVsWasps.ipynb) .
 
-I used a subset of that data and built my model, in the original dataset there were around 25000 images for training but I am only using 2000 images..
-I used three different achitectures to train this dataset and increased the validation accuracy from around 73% to 96%!!!
+## Visão geral do Projeto
 
-The basic steps follwed in each architecture was:
-* Resize the images to desired input size and apply necesaary pre processing like shear,rotate,shift etc.
-* Design, train and validate the model using the dataset.
-* Download an image from the internet and test it on the trained model.
+Este projeto foi inspirado no Kaggle Challange realizado em 2003, no qual milhares de imagens de abelhas e vespas foram dadas e um modelo deveria ser construído para classificar essas imagens em abelhas e vespas. A melhor precisão alcançada nessa competição foi de 98%!
 
-## Model Architectures
-### 1. My Model
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 150x150x3 RGB image   						| 
-| Convolution 3x3     	|  filters = 32 						|
-| RELU					|												|
-| MaxPooling 2x2     	|  						|
-| Convolution 3x3     	|  filters= 64 						|
-| RELU					|												|
-| MaxPooling 2x2     	|  						|
-| Convolution 3x3     	|  filters = 128 						|
-| RELU					|												|
-| MaxPooling 2x2     	|  						|
-| Convolution 3x3     	|  filters = 128 						|
-| RELU					|												|
-| MaxPooling 2x2     	|  						|
-| Flatten				|												|
-| Fully connected(Dense)		| Outputs=512									|
-| RELU					|												|
-| Output				| Outputs=1, activation=sigmoid 								|
+Utilizei um subconjunto desses dados e construí meu modelo, no conjunto de dados original havia cerca de 25000 imagens para treinamento, mas só estou utilizando 2000 imagens...
+Usei três arquiteturas diferentes para treinar este conjunto de dados e aumentei a precisão de validação de cerca de 73% para 96%!!!
 
-You can find the trained model file [here](https://github.com/chinmaykumar06/cats-vs-dogs-classifier/blob/master/models/my_model.h5).
+As etapas básicas dobradas em cada arquitetura foram:
 
-For this model the results obtained were:
-* **Validation accuracy:72.8%**
-* **Training accuracy:92.55%**
+* Redimensionar as imagens para o tamanho de entrada desejado e aplicar o pré-processamento necessário como cisalhamento, rotação, deslocamento, etc.
+* Projetar, treinar e validar o modelo utilizando o conjunto de dados.
+* Baixar uma imagem da Internet e testá-la no modelo treinado.
 
-### 2. Data Augmentation
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 150x150x3 RGB image   						| 
-| Convolution 3x3     	|  filters = 32 						|
-| RELU					|												|
-| MaxPooling 2x2     	|  						|
-| Convolution 3x3     	|  filters= 64 						|
-| RELU					|												|
-| MaxPooling 2x2     	|  						|
-| Convolution 3x3     	|  filters = 128 						|
-| RELU					|												|
-| MaxPooling 2x2     	|  						|
-| Convolution 3x3     	|  filters = 128 						|
-| RELU					|												|
-| MaxPooling 2x2     	|  						|
-| Flatten				|												|
-| Dropout				| Probability 50%								|
-| Fully connected(Dense)		| Outputs=512									|
-| RELU					|												|
-| Output				| Outputs=1, activation=sigmoid 								|
+## Arquitetura do modelo
 
+### Transferir aprendizagem usando VGG16
 
-The dropout layer avoids overfitting as this model has been trained for 100 epochs.
+|         Layer          |          Description          |
+| :--------------------: | :---------------------------: |
+|         Input          |      150x150x3 RGB image      |
+|         VGG16          |          Functional           |
+|        Flatten         |                               |
+| Fully connected(Dense) |          Outputs=256          |
+|          RELU          |                               |
+|         Output         | Outputs=1, activation=sigmoid |
 
-You can find the trained model file [here](https://github.com/chinmaykumar06/cats-vs-dogs-classifier/blob/master/models/augmented_cnn.h5).
+~~Você pode encontrar o arquivo do modelo treinado [aqui](https://github.com/Esphios/bees-vs-wasps-classifier/blob/master/models/vgg16_cnn.h5).~~ (removido por tamanho)
 
-For this model the results obtained were:
-* **Validation accuracy: 81.25%**
-* **Training accuracy: 82.50%**
+Para este modelo, os resultados obtidos foram:
 
-### 3. Transfer Learning using VGG16
-
-
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 150x150x3 RGB image   						| 
-| VGG16    	|  Functional 						|
-| Flatten				|												|
-| Fully connected(Dense)		| Outputs=256								|
-| RELU					|												|
-| Output				| Outputs=1, activation=sigmoid 								|
-
-You can find the trained model file [here](https://github.com/chinmaykumar06/cats-vs-dogs-classifier/blob/master/models/vgg16_cnn.h5).
-
-For this model the results obtained were:
-* **Validation accuracy:96.1%**
-* **Training accuracy:98.65%**
+* **Precisão de validação: 92.4%**
+* **Precisão de treinamento: 98.3%**
 
 ## Model Design and Implementation
 
-Our problem statement was to classify colored images into two categories viz Cats and Dogs, for extracting features from an image CNNs are the best solution, although they often require hefty computations. Hence I started with a simple model consisting of 4 Convolutional layers followed by MaxPool layers, for introducing non linearity in the model the activation function used throughtout was ReLU. I trained this model for 20 epochs and acheived a validation accuracy of abouit 73% which is pretty good for a simple model as this, however greater accuracy could have been used if I had trained it on a larger dataset. Hence in my next model I peformed data augmentation!
+## Projeto e implementação do modelo
 
-In my second model I performed various operations on the training images like shearing, shifting and rotation; thereafter those images were feeded to the model, I kept the architecture same as the previous model, however this time I trained the model for 100 epochs hence added a dropout layer to avoid overfitting. This model gave me a validation accuracy of 81.25%. Note that I performed data augmentation using the ImageDataGenerator provided by keras hence the size of my dataset didn't increase. This Data generator just performs the specified operations on the images randomly in every batch before inputing it to the model, hence making our data more diverse. The # images used for training is still the same. Getting better results using less data is a great acheivement since we can do better predictions using the same computational power!!
+Nosso problema foi classificar as imagens coloridas em duas categorias: Abelhas e Vespas, para extrair as características de uma imagem CNNs são a melhor solução, embora muitas vezes exijam cálculos pesados. Assim, utilizei o Transfer learning usando a popular arquitetura [VGG16](https://arxiv.org/pdf/1409.1556.pdf). Este modelo tinha muitos parâmetros, pois mantive a camada VGG16 como funcional e não a congelei durante o treinamento! Treinei o modelo durante 30 épocas. Como esta era uma arquitetura complexa, eu criei pontos de verificação no final de cada época para que eu pudesse reverter se meu treinamento parasse abruptamente, também esta história de épocas pode ser usada para ajustar ainda mais o modelo. Para todos os modelos que usei RMSprop como otimizador, neste modelo usei uma taxa de aprendizagem particularmente baixa de 1e-7 para obter melhores resultados. Após o treinamento, obtive uma precisão de validação de 96%, o que, de acordo comigo, é um ótimo resultado para apenas 2000 imagens de treinamento.
 
-Finally I went for Transfer learning using the popular [VGG16](https://arxiv.org/pdf/1409.1556.pdf) architecture. Unlike my last models this model had many many parameters as I kept the VGG16 layer as functional and didn't freeze it while training! I trained the model for 30 epochs. Since this was a complex architecture I used [callbacks](https://github.com/chinmaykumar06/cats-vs-dogs-classifier/tree/master/Callbacks) to create checkpoints at the end of each epoch so that I could revert back if my training stopped abruptly, also this history of epochs can be used for further fine tuning the model. For all the models I have used RMSprop as an optimizer, in this model I used a particularly low learning rate of 1e-5 for obtaining best results. After the training I got a validation accuracy of 96% which according to me is a great result for just 2000 training images. 
+## Teste, Validação e Análise
 
-## Testing, Validation and Analysis
+Os testes feitos nas imagens baixadas da rede também deram uma grande visão sobre o desempenho do modelo. Uma das imagens baixadas da rede consistia de muitos insetos.
 
-I tested all three models using my test dataset and the images taken from internet. The testing accuracy for the three models were:
+Estatisticamente essa imagem tem mais abelhas do que vespas, quando a imagem foi dada como entrada para os modelos foi prevista como um cão com alta confiança nos três modelos, o que não é surpreendente, pois os abelhas ocupam uma parte maior da imagem em comparação com os vespas e, portanto, quando as camadas convolutivas extraem as características da imagem, as características dos abelhas são em sua maioria.
 
-* My Model: 72.29%
-* My Model with Data Augmentation: 80.9%
-* Transfer Learning using VGG16: 95.8%
+Para observar corretamente o trabalho das camadas convolutivas e das camadas maxpool, observei até mesmo a saída das camadas Conv e MaxPool individuais para o primeiro modelo, o que me deu uma grande visão do processo de filtragem e agrupamento.
 
-The testing done on the images downloaded from the net also gave great insight about the model performance. One of the images downlaoded from the net consisted of many dogs and cats as shown below:
+## Adicionando novo conjunto de dados de treino
 
-<img src="https://github.com/chinmaykumar06/cats-vs-dogs-classifier/blob/master/images_from_net/confuse.jpg" width="300">
+Se você quiser adicionar uma nova imagem de treinamento aos conjuntos de dados disponíveis, você pode adicionar as imagens de abelhas e vespas a **/data/train/bee*** e **/data/train/wasp** respectivamente. O tamanho da imagem não importa, pois ela é redimensionada antes do treinamento no código.
 
-Statistically this image has more cats than dogs, when the image was given as input to the models it was predicted as a dog with high confidence in all three models, which is not surprising as the dogs occupy a larger part of the image as compared to the cats and hence when the convolutional layers extract the features from the image the features of dogs are in majority.
+## Implementar este projeto
 
-To correctly observe the working of convolutional layers and maxpool layers I have even observed the output of the individual Conv layers and MaxPool Layers for the first model, it gave me a great insight into the process of filtering and pooling. 
+### I. Se você tiver uma GPU dedicada, siga estes passos para executar este modelo usando [miniconda](https://conda.io/en/latest/)
 
-## Adding new train dataset:
+**Instalar** [miniconda](http://conda.pydata.org/miniconda.html) em sua máquina. Instruções detalhadas:
 
-If you want to add a new training image to the available datasets, you can add the images of cats and dogs to **/data/train/cats** and **/data/train/dogs** respectively. The image size doesn't matter as it it resized before training in the code.
+* **Linux:** <http://conda.pydata.org/docs/install/quick.html#linux-miniconda-install>
+* **Mac:** <http://conda.pydata.org/docs/install/quick.html#os-x-miniconda-install>
+* **Windows:** <http://conda.pydata.org/docs/install/quick.html#windows-miniconda-install>
 
-## Implement this project
+**Clone** o repositório.
 
-### I. If you have a dedicated GPU then follow these steps to run this model using [miniconda](https://conda.io/en/latest/):
-
-**Install** [miniconda](http://conda.pydata.org/miniconda.html) on your machine. Detailed instructions:
-
-- **Linux:** http://conda.pydata.org/docs/install/quick.html#linux-miniconda-install
-- **Mac:** http://conda.pydata.org/docs/install/quick.html#os-x-miniconda-install
-- **Windows:** http://conda.pydata.org/docs/install/quick.html#windows-miniconda-install
-
-**Clone** the repository. 
-
-(You will require Git for this)
+(Você precisará do Git para isso)
 
 ```sh
-git clone https://github.com/chinmaykumar06/cats-vs-dogs-classifier.git
-cd cats-vs-dogs-classifier
+git clone https://github.com/Esphios/bees-vs-wasps-classifier.git
+cd bees-vs-wasps-classifier
 ```
 
-In Windows: After you have cloned the repository in the same folder open the Command Prompt or else the Anaconda Prompt, for Command Promt run activate to activate your base environment.
+No Windows: Depois de clonar o repositório na mesma pasta, abra o Prompt de Comando ou então o Prompt Anaconda, para que o Promt de Comando seja executado, ative seu ambiente base.
 
-**Create** my_project_env.  Running this command will create a new `conda` environment named my_project_env.
+**Crie** env_meu_projeto.  Executando este comando, será criado um novo ambiente `conda` chamado env_meu_projeto.
+
 ```
-conda create --name my_project_env python =3.7
+conda create --name env_meu_projeto python=3.7
 ```
 
-**Download** the dependencies.  Running this command will download the dependencies and libraries in the created environment.
+**Baixe** as dependências.  Executando este comando, as dependências e bibliotecas serão baixadas no ambiente criado.
 
 ```
 pip install -r requirements.txt
 ````
 
-**Verify** that the environment was created in your environments:
+**Verifique** se o ambiente foi criado nos seus ambientes:
 
 ```sh
 conda info --envs
 ```
-**If you think some error happend while performing the above process you can clean up the libraries and uninstall athe environment and try again!**
 
-**Cleanup** downloaded libraries (remove tarballs, zip files, etc):
+**Caso você tenha certeza de que seu ambiente está instalado corretamente,**
 
-```sh
-conda clean -tp
-```
-
-**Uninstalling**
-
-To uninstall the environment:
-
-```sh
-conda remove --name my_project_env --all
-```
-
-**Once you are sure that your environment is installed properly,**
-
-**Activate** the enoviornment.  Running this command will activate the created environment where you can install the dependencies.
+**Ativar** o ambiente.  Executando este comando, será ativado o ambiente criado onde você poderá instalar as dependências.
 
 `````
-conda activate my_project_env
+conda activate env_meu_projeto
 `````
 
-**Open** jupyter notebook.  Running this command will open jupyter notebook.
+**Abrir** o notebook do jupyter.  A execução deste comando abrirá o notebook do jupyter.
 
 ```
 jupyter notebook
 ````
 
-**Open the CatsVsDogs.ipynb** and make sure you choose the right environment where you installed your libraries and then start executing the cells!
 
-To exit the environment when you have completed your work session, simply close the terminal window.
+**Desinstalar***
+Para desinstalar o ambiente:
 
-### II. If you want to run this project on you machine with a CPU, roughly these are the dependencies required:
-* Jupyter notebook
-* Tensorflow = 2.1
-* Keras = 2.4.3
-* Python 3.7
-* Matplotlib
-* Seaborn
-* Scikit-Learn
-* Pandas
-* Numpy
-* pydotplus
-* graphviz
+```sh
+conda remove --name env_meu_projeto --all
+```
 
-### III. Using Google Colab
-This is highly recommended as Colab provides a GPU runtime and you don't have to install the dependencies on your system. Also this is the least complex process!
+**Abra os BeesVsWasps.ipynb** e certifique-se de escolher o ambiente certo onde você instalou suas bibliotecas e então comece a executar as células!
 
-1. Open https://colab.research.google.com, click **Sign in** in the upper right corner, use your Google credentials to sign in.
-2. Click **GITHUB** tab, paste https://github.com/chinmaykumar06/cats-vs-dogs-classifier.git and press Enter
-3. This repository will get cloned in your Drive in the folder Colab Notebooks
-4. Go to the directory and open CatsVsDogs.ipynb using Colab.
-5. Click **Runtime -> Change runtime type** and select **GPU** in Hardware accelerator box.
-6. Now mount your drive and using cd change your path to the cloned repository so that you can use the data and images without adding complex path names.
-7. You can now start executing the codeblocks!
+Para sair do ambiente quando tiver concluído sua sessão de trabalho, basta fechar a janela do terminal.
